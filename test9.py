@@ -24,7 +24,7 @@ while True:
                 'unixtime': {'S': "2"},
                 'mymess': {'S': "0"}
             })
-        sleep(3)
+        sleep(2)
     elif media == None:
 
         videoid = dynamodb.get_item(TableName='logs', Key={'unixtime': {'S': "1"}})
@@ -35,10 +35,10 @@ while True:
         best = video.getbest()
         media = vlc.MediaPlayer(best.url)
         media.play()
-        sleep(3)
+        sleep(2)
 
     elif media.is_playing() == True:
-        sleep(3)
+        sleep(2)
         print(media.is_playing())
         continue
 
@@ -53,7 +53,7 @@ while True:
         best = video.getbest()
         media = vlc.MediaPlayer(best.url)
         media.play()
-        sleep(3)
+        sleep(2)
 
 
 

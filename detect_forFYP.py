@@ -170,14 +170,14 @@ def detect(save_img=False):
                     print("we haven't detect human")
                 elif (0 in detlist) and pressbutton == 0:
                     print("we detect human")
-                    cooldown = time_now + datetime.timedelta(seconds=16)
+                    cooldown = time_now + datetime.timedelta(seconds=7)
                     key = 'frame-' + time.strftime("%Y%m%d-%H%M%S") + '.jpg'
                     # s3.upload_file(im0, 'bucket-for-upload-frame', key)
                     _, jpg_data = cv2.imencode('.jpg', im0)
                     s3.put_object(Body=jpg_data.tostring(), Bucket='bucket-for-upload-frame', Key=key)
                 elif (0 in detlist) and pressbutton == 1:
                     print("we detect human after press button's' ")
-                    cooldown = time_now + datetime.timedelta(seconds=16)
+                    cooldown = time_now + datetime.timedelta(seconds=7)
                     key = 'frame2-' + time.strftime("%Y%m%d-%H%M%S") + '.jpg'
                     # s3.upload_file(im0, 'bucket-for-upload-frame', key)
                     _, jpg_data = cv2.imencode('.jpg', im0)
@@ -185,7 +185,7 @@ def detect(save_img=False):
                     pressbutton = 0
                 elif (0 in detlist) and pressbutton == 2:
                     print("we detect human after press button't' ")
-                    cooldown = time_now + datetime.timedelta(seconds=16)
+                    cooldown = time_now + datetime.timedelta(seconds=7)
                     key = 'frame3-' + time.strftime("%Y%m%d-%H%M%S") + '.jpg'
                     # s3.upload_file(im0, 'bucket-for-upload-frame', key)
                     _, jpg_data = cv2.imencode('.jpg', im0)
