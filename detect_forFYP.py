@@ -153,10 +153,10 @@ def detect(save_img=False):
                 #check the first class of the detection class,since if it
                 oldc = c
 
-            if cv2.waitKey(1) & 0xFF == ord("s"):
+            if cv2.waitKey(8) & 0xFF == ord("s"):
                 pressbutton = 1
                 print('press "s" ')
-            elif cv2.waitKey(1) & 0xFF == ord("t"):
+            elif cv2.waitKey(8) & 0xFF == ord("t"):
                 pressbutton = 2
                 print('press "t" ')
 

@@ -62,6 +62,7 @@ def lambda_handler(event, context):
         print("we can't detect any movie" + "    "+ utime)
 
     Faceid = detect_faces(image, bucket, key)
+    print("faceid:   " + Faceid)
 
     if key[5] =="3" and itemid:
         videoid =get_videoid(itemid)
@@ -115,7 +116,7 @@ def detect_faces(image, bucket, key):
                 'mymess': {'S': "person: " + str(faceid)}
             })
         return faceid
-        print(faceid)
+
     else:
         # Face not found in the Rekognition database
         faces = rekognition.index_faces(Image=image, CollectionId=face_collection)
