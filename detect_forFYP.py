@@ -155,9 +155,10 @@ def detect(save_img=False):
 
             if cv2.waitKey(1) & 0xFF == ord("s"):
                 pressbutton = 1
+                print('press "s" ')
             elif cv2.waitKey(1) & 0xFF == ord("t"):
                 pressbutton = 2
-
+                print('press "t" ')
 
             #here is the condition we can upload photo to s3, when cooldown is finish and detect human
             # we need to compare the type first, since if compare with None or not, it will cause error, since the type is not from python origin
@@ -198,7 +199,7 @@ def detect(save_img=False):
 
             else:
                 time_now = datetime.datetime.now()
-                print("we detect nothing or start cooldown")
+                # print("we detect nothing or start cooldown")
 
 
 
