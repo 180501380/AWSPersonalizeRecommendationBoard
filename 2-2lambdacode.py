@@ -59,7 +59,7 @@ def lambda_handler(event, context):
 
     Faceid = detect_faces(image, bucket, key)
 
-    if key[5] =="3":
+    if key[5] =="3" and itemid:
         videoid =get_videoid(itemid)
     else:
         videoid = get_recommend_trailerlink(itemid,Faceid)
