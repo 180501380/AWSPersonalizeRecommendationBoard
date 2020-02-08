@@ -34,7 +34,7 @@ def lambda_handler(event, context):
         ProjectVersionArn='arn:aws:rekognition:us-east-1:910854190331:project/movie4/version/movie4.2020-02-04T18.53.26/1580813606732',
         Image=image,
         MaxResults=1,
-        MinConfidence=80
+        MinConfidence=40
     )
 
     try:
@@ -49,6 +49,8 @@ def lambda_handler(event, context):
                 'unixtime': {'S': utime},
                 'mymess': {'S': "we have detect" + itemid}
             })
+        #debug
+        print("we have detect" + itemid +"   " + utime)
     else:
         dynamodb.put_item(
             TableName=logging_table,
@@ -56,6 +58,8 @@ def lambda_handler(event, context):
                 'unixtime': {'S': utime},
                 'mymess': {'S': "we can't detect any movie"}
             })
+        #debug
+        print("we can't detect any movie" + "    "+ utime)
 
     Faceid = detect_faces(image, bucket, key)
 
@@ -63,14 +67,17 @@ def lambda_handler(event, context):
         videoid =get_videoid(itemid)
     else:
         videoid = get_recommend_trailerlink(itemid,Faceid)
-
-    #make the time a bit larger, since if the time is same, it will update the same record of detect the item or not message.
+    print(key)
+    # make the time a bit larger, since if the time is same, it will update the same record of detect the item or not message.
     dynamodb.put_item(
         TableName=logging_table,
         Item={
             'unixtime': {'S': str(int(utime)+10)},
             'mymess': {'S': "This is your youtube videoid:  " + videoid}
         })
+    # debug
+    print("This is your youtube videoid :  " + videoid +"    " + str(int(utime)+10))
+
     if key[5] in ["2","3"]:
         dynamodb.put_item(
             TableName=logging_table,
