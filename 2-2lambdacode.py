@@ -115,6 +115,7 @@ def detect_faces(image, bucket, key):
                 'mymess': {'S': "person: " + str(faceid)}
             })
         return faceid
+        print(faceid)
     else:
         # Face not found in the Rekognition database
         faces = rekognition.index_faces(Image=image, CollectionId=face_collection)
@@ -209,7 +210,8 @@ def get_videoid(recommendid):
 
 def search_videoid(moviename):
 
-    api = "AIzaSyAPmLV6syClmBFPBsQP15ATG3axev1dtUk"
+    # api = "AIzaSyAPmLV6syClmBFPBsQP15ATG3axev1dtUk"
+    api = "AIzaSyBNeB4tPi4pJtPwaqfZoDMAlp-A4D0gdRA"
     youtube = build('youtube', 'v3', developerKey=api, cache_discovery=False)
 
     moviename = moviename
