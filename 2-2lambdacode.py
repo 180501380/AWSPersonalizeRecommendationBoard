@@ -34,7 +34,7 @@ def lambda_handler(event, context):
         ProjectVersionArn='arn:aws:rekognition:us-east-1:910854190331:project/movie4/version/movie4.2020-02-04T18.53.26/1580813606732',
         Image=image,
         MaxResults=1,
-        MinConfidence=40
+        MinConfidence=50
     )
 
     try:
@@ -62,6 +62,7 @@ def lambda_handler(event, context):
         print("we can't detect any movie" + "    "+ utime)
 
     Faceid = detect_faces(image, bucket, key)
+    #debug
     print("faceid:   " + Faceid)
 
     if key[5] =="3" and itemid:
