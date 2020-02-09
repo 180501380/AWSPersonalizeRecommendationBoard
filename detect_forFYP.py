@@ -205,8 +205,9 @@ def detect(save_img=False):
 
 
             # put text to stream
-            im1 = cv2.putText(im0, " press 's' to trigger detection ", (10,50), cv2.FONT_HERSHEY_COMPLEX, 1,(0,255,255),2,cv2.LINE_AA)
-            im1 = cv2.putText(im1, " press 't' to trigger detection ", (10, 200), cv2.FONT_HERSHEY_COMPLEX, 1,(0, 255, 255), 2, cv2.LINE_AA)
+            im1 = im0
+            cv2.putText(im1, " press 's' to trigger detection ", (10,50), cv2.FONT_HERSHEY_COMPLEX, 1,(0,255,255),2,cv2.LINE_AA)
+            cv2.putText(im1, " press 't' to trigger detection ", (10, 200), cv2.FONT_HERSHEY_COMPLEX, 1,(0, 255, 255), 2, cv2.LINE_AA)
 
             # Stream results
             if view_img:
