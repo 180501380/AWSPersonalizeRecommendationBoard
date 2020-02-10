@@ -31,7 +31,7 @@ def lambda_handler(event, context):
     }
 
     response = rekognition.detect_custom_labels(
-        ProjectVersionArn='arn:aws:rekognition:us-east-1:910854190331:project/movie4/version/movie4.2020-02-04T18.53.26/1580813606732',
+        ProjectVersionArn='arn:aws:rekognition:us-east-1:910854190331:project/movie4/version/movie4.2020-02-10T19.12.42/1581333159624',
         Image=image,
         MaxResults=1,
         MinConfidence=43
