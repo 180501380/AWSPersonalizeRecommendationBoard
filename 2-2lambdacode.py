@@ -62,11 +62,13 @@ def lambda_handler(event, context):
         print("we can't detect any movie" + "    "+ utime)
 
     Faceid = detect_faces(image, bucket, key)
+
     #debug
     print("faceid:   " + Faceid)
 
     if key[5] =="3" and itemid:
         videoid =get_videoid(itemid)
+        put_interaction(Faceid, itemid)
     else:
         videoid = get_recommend_trailerlink(itemid,Faceid)
     print(key)
@@ -214,8 +216,8 @@ def search_videoid(moviename):
 
     # api = "AIzaSyAPmLV6syClmBFPBsQP15ATG3axev1dtUk"
     # api = "AIzaSyBNeB4tPi4pJtPwaqfZoDMAlp-A4D0gdRA"
-    # api = "AIzaSyDNytLy54eX78XnZIZTwfWoO_wtqRL_5-8"
-    api = "AIzaSyC0doWSvgIslVMFtEZaMatNhlu9DlIzIZU"
+    api = "AIzaSyDNytLy54eX78XnZIZTwfWoO_wtqRL_5-8"
+    # api = "AIzaSyC0doWSvgIslVMFtEZaMatNhlu9DlIzIZU"
     youtube = build('youtube', 'v3', developerKey=api, cache_discovery=False)
 
     moviename = moviename
@@ -233,11 +235,13 @@ def put_interaction(userid,movieid):
     utime = str(int(time.time()))
 
 
+
+    #debug
     lastaction = dynamodb.get_item(TableName='logs', Key={'unixtime': {'S': "3"}})
     lastuserid = lastaction['Item']['faceid']['S']
     lastitemid = lastaction['Item']['mymess']['S']
 
-    if (lastuserid != userid) and (lastitemid != movieid):
+    if (lastuserid != userid) or (lastitemid != movieid):
         personalize_events.put_events(
             trackingId="281a4064-fdfc-46be-b169-986ee3840aa4",
             userId=userid,
@@ -249,6 +253,7 @@ def put_interaction(userid,movieid):
                 'eventType': 'CLICK',
             }]
         )
+
         dynamodb.put_item(
             TableName=logging_table,
             Item={
@@ -266,3 +271,15 @@ def put_interaction(userid,movieid):
             'unixtime': {'S': str(int(utime)+20)},
             'mymess': {'S': "put_event to userid: "+ userid + "itemid: "+ movieid}
         })
+
+
+def debug(Faceid, itemid):
+    #debug
+    lastaction = dynamodb.get_item(TableName='logs', Key={'unixtime': {'S': "3"}})
+    lastuserid = lastaction['Item']['faceid']['S']
+    lastitemid = lastaction['Item']['mymess']['S']
+
+    if (lastuserid != Faceid) or (lastitemid != itemid):
+        return ("we haven't detect that before, so we will have put event  movieid:" + lastitemid  +"  with person: " + lastuserid)
+    else:
+        return ("movieid: " + lastitemid  +"  with person: " + lastuserid)
