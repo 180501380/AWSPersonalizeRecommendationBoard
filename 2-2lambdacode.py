@@ -232,17 +232,33 @@ def put_interaction(userid,movieid):
     current_time = int(time.time())
     utime = str(int(time.time()))
 
-    personalize_events.put_events(
-        trackingId="281a4064-fdfc-46be-b169-986ee3840aa4",
-        userId=userid,
-        sessionId='1',
 
-        eventList=[{
-            'sentAt': current_time,
-            'properties': "{\"itemId\":\"" + str(movieid) + "\"}",
-            'eventType': 'CLICK',
-        }]
-    )
+    lastaction = dynamodb.get_item(TableName='logs', Key={'unixtime': {'S': "3"}})
+    lastuserid = lastaction['Item']['faceid']['S']
+    lastitemid = lastaction['Item']['mymess']['S']
+
+    if (lastuserid != userid) and (lastitemid != movieid):
+        personalize_events.put_events(
+            trackingId="281a4064-fdfc-46be-b169-986ee3840aa4",
+            userId=userid,
+            sessionId='1',
+
+            eventList=[{
+                'sentAt': current_time,
+                'properties': "{\"itemId\":\"" + str(movieid) + "\"}",
+                'eventType': 'CLICK',
+            }]
+        )
+        dynamodb.put_item(
+            TableName=logging_table,
+            Item={
+                'unixtime': {'S': "3"},
+                'mymess': {'S': movieid},
+                'faceid': {'S': userid}
+            })
+
+
+
 
     dynamodb.put_item(
         TableName=logging_table,
