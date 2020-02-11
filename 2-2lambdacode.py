@@ -34,7 +34,7 @@ def lambda_handler(event, context):
         ProjectVersionArn='arn:aws:rekognition:us-east-1:910854190331:project/movie4/version/movie4.2020-02-10T19.12.42/1581333159624',
         Image=image,
         MaxResults=1,
-        MinConfidence=50
+        MinConfidence=51
     )
 
     try:
@@ -216,8 +216,11 @@ def search_videoid(moviename):
 
     # api = "AIzaSyAPmLV6syClmBFPBsQP15ATG3axev1dtUk"
     # api = "AIzaSyBNeB4tPi4pJtPwaqfZoDMAlp-A4D0gdRA"
-    api = "AIzaSyDNytLy54eX78XnZIZTwfWoO_wtqRL_5-8"
+    # api = "AIzaSyDNytLy54eX78XnZIZTwfWoO_wtqRL_5-8"
     # api = "AIzaSyC0doWSvgIslVMFtEZaMatNhlu9DlIzIZU"
+    # api = "AIzaSyDLth8xB9eWXXMb7JfdXZ5sG6_Qzilk3H4"
+    # api = "AIzaSyA23-AIarv-AieyK_pDZfFpH_7lxLe3nOQ"
+    api = "AIzaSyB767n9_ZqeFXBMlpqIQD76BRBYmPIMgi0"
     youtube = build('youtube', 'v3', developerKey=api, cache_discovery=False)
 
     moviename = moviename
