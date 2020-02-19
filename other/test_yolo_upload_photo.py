@@ -2,17 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 #for cooldowntime
 import time
 import datetime
