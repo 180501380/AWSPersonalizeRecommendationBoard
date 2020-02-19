@@ -9,6 +9,7 @@ cap = cv2.VideoCapture(0)
 while cap.isOpened():
     ret, frame = cap.read()
     laplacian_var = cv2.Laplacian(frame, cv2.CV_64F).var()
+
     cv2.imshow('frame', frame)
 
 
@@ -18,11 +19,11 @@ while cap.isOpened():
         print("photo is good" + str(laplacian_var))
 
 
-    if cv2.waitKey(1) & 0xFF == ord('q'):
+    if cv2.waitKey(2) & 0xFF == ord('q'):
         break
-    elif (cv2.waitKey(1) & 0xFF == ord('w')) and (laplacian_var >= 470) :
-        key = '\\frame-cradle2' + time.strftime("%Y%m%d-%H%M%S") + '.jpg'
-        cv2.imwrite(filename="D:\main\learnyolov3\yolov3-master\images"+ key, img = frame)
+    elif (cv2.waitKey(2) & 0xFF == ord('w')) and (laplacian_var >= 470) :
+        key = '\\frame-testblurrydetect' + time.strftime("%Y%m%d-%H%M%S") + '.jpg'
+        cv2.imwrite(filename="D:\main\learnyolov3\yolov3-master\images\\test"+ key, img = frame)
 
 
 
